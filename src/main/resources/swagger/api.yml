@@ -363,11 +363,14 @@ components:
       required:
         - title
         - playTime
+        - albumId
       properties:
         title:
           type: string
         playTime:
           $ref: '#/components/schemas/Duration'
+        albumId:
+          $ref: '#/components/schemas/LongId'
 
     Song:
       allOf:
