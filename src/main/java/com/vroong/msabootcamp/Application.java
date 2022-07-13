@@ -11,9 +11,15 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(exclude = ErrorMvcAutoConfiguration.class)
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@EnableJpaAuditing(auditorAwareRef = "customAuditorAware", dateTimeProviderRef = "customDateTimeProvider")
+@EnableJpaRepositories(
+		basePackages = "com.vroong.msabootcamp.repository"
+)
 public class Application {
 
 	public static void main(String[] args) {

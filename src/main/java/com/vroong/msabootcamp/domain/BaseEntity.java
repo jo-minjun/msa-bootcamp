@@ -32,10 +32,10 @@ public abstract class BaseEntity {
   private OffsetDateTime updatedAt;
 
   @CreatedBy
-  @Column(columnDefinition = "BINARY(16)", updatable = false)
+  @Column(length = 36, updatable = false)
   private UUID createdBy;
 
   @LastModifiedBy
-  @Column(columnDefinition = "BINARY(16)")
+  @Column(length = 36)
   private UUID updatedBy;
 }

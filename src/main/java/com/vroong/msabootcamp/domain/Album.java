@@ -29,16 +29,41 @@ import lombok.ToString;
 @EqualsAndHashCode(of = {"id"})
 public class Album extends BaseEntity {
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "singer_id", foreignKey = @ForeignKey(name = "FK_ALBUM_TO_SINGER"))
+  private Singer singer;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private String title;
+
   private OffsetDateTime publishedAt;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "singer_id", foreignKey = @ForeignKey(name = "FK_ALBUM_TO_SINGER"))
-  private Singer singer;
-
+  @BatchSize(size = 100)
   @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
   private List<Song> songs = new ArrayList<>();
+
+  @Builder
+  private Album(Long id, String title, OffsetDateTime publishedAt) {
+    this(title, publishedAt);
+    this.id = id;
+  }
+
+  @Builder
+  private Album(String title, OffsetDateTime publishedAt) {
+    this.title = title;
+    this.publishedAt = publishedAt;
+  }
+
+  public static Album createFrom(CreateAlbumRequestDto dto, Singer singer) {
+    final Album album = new Album(dto.getTitle(), dto.getPublishedAt());
+    album.registerSinger(singer);
+    return album;
+  }
+
+  public void registerSinger(Singer singer) {
+    this.singer = singer;
+    singer.getAlbums().add(this);
+  }
 }
