@@ -54,10 +54,11 @@ class SongApiDelegateImplTest {
   @Test
   @WithMockUser(value = "test")
   void createSong() throws Exception {
+    final long id = 1L;
     final CreateSongRequestDto content = new CreateSongRequestDto()
+        .albumId(id)
         .title("흐르는 강물을 거슬러 오르는 연어")
         .playTime("03:33");
-    final long id = 1L;
     when(songService.createSong(content))
         .thenReturn(new SongDto().songId(id));
 
