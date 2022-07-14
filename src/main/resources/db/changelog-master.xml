@@ -26,4 +26,8 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
   <include file="db/changelog/20120810-table-shedlock.xml"/>
   <include file="db/changelog/20120820-table-persistent_events.xml"/>
   <include file="db/changelog/20120830-index-persistent_events.xml"/>
+
+  <include file="db/changelog/22071410-table-albums.xml"/>
+  <include file="db/changelog/22071420-table-songs.xml"/>
+  <include file="db/changelog/22071430-table-singers.xml"/>
 </databaseChangeLog>
