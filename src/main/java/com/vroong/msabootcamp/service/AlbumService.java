@@ -25,6 +25,7 @@ public class AlbumService {
   private final AlbumRepository albumRepository;
   private final SingerRepository singerRepository;
   private final AlbumMapper albumMapper;
+  private final PersistentEventCreator persistentEventCreator;
 
   @Transactional
   public AlbumDto createAlbum(CreateAlbumRequestDto dto) {
@@ -33,6 +34,7 @@ public class AlbumService {
     final Album album = Album.createFrom(dto, singer);
 
     final Album savedAlbum = albumRepository.save(album);
+    persistentEventCreator.create("ALBUM_CREATED", savedAlbum);
 
     return albumMapper.toDto(savedAlbum);
   }

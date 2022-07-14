@@ -1,5 +1,7 @@
 package com.vroong.msabootcamp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vroong.msabootcamp.api.model.CreateAlbumRequestDto;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString(of = {"id", "publishedAt", "songs"})
 @EqualsAndHashCode(of = {"id"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Album extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)

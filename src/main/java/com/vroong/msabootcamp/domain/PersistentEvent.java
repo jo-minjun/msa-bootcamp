@@ -37,7 +37,7 @@ public class PersistentEvent implements Serializable {
 
   // TODO create and interface and use that type. e.g. interface PersistentEventBody { UUID getExternalId(); }
   // TODO define @Converter to serialize the body to JSON
-//  @Lob
+  @Lob
   private String body;
 
   private Instant createdAt = Instant.now();
