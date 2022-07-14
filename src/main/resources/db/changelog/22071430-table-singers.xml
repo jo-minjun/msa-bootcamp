@@ -1,0 +1,38 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd ">
+
+  <changeSet id="22071430" author="minjun.jo">
+    <!--To ignore md5 checksum-->
+    <!--<validCheckSum>1:any</validCheckSum>-->
+    <comment>create examples table</comment>
+
+    <createTable tableName="singers" remarks="">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" primaryKeyName="PK_SINGERS_ID"/>
+      </column>
+      <column name="name" type="varchar(64)" remarks=""/>
+      <column name="created_at" type="datetime(6)" remarks="">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_at" type="datetime(6)" remarks="">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_by" type="varchar(36)" remarks="">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_by" type="varchar(36)" remarks="">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <rollback>
+      <dropTable tableName="singers"/>
+    </rollback>
+  </changeSet>
+</databaseChangeLog>
