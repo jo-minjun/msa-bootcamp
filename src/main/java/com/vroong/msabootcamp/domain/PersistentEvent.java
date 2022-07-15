@@ -4,6 +4,9 @@
  */
 package com.vroong.msabootcamp.domain;
 
+import static com.vroong.msabootcamp.config.Constants.ZONE_ID;
+
+import java.time.Clock;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -37,10 +40,10 @@ public class PersistentEvent implements Serializable {
 
   // TODO create and interface and use that type. e.g. interface PersistentEventBody { UUID getExternalId(); }
   // TODO define @Converter to serialize the body to JSON
-//  @Lob
+  @Lob
   private String body;
 
-  private Instant createdAt = Instant.now();
+  private Instant createdAt = Instant.now(Clock.system(ZONE_ID));
 
   private Instant producedAt;
 

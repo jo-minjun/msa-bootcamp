@@ -77,7 +77,16 @@ spring:
             header-mode: headers
             partition-key-expression: headers['partitionKey']
             partition-count: 1
+        subscribableChannel:
+          binder: kafka
+          destination: local-msabootcamp-output
+          content-type: application/json
+          consumer:
+            header-mode: embeddedHeaders
+            checkpointMode: record
       default-binder: kafka
+
+#      consume 채널 설정 - 이름: subscribableChannel, consumer group 설정
 
 management:
   endpoints:
