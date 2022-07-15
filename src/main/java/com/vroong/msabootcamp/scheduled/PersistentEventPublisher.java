@@ -1,10 +1,12 @@
 package com.vroong.msabootcamp.scheduled;
 
+import static com.vroong.msabootcamp.config.Constants.ZONE_ID;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
 import com.vroong.msabootcamp.domain.PersistentEvent;
 import com.vroong.msabootcamp.repository.PersistentEventRepository;
 import com.vroong.msabootcamp.stream.MessageProducer;
+import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -63,7 +65,7 @@ public class PersistentEventPublisher {
   @SchedulerLock(name = "PersistentEventPublisher")
   @Async
   public void publish() {
-    final Instant timeScope = Instant.now().minus(1, ChronoUnit.MINUTES);
+    final Instant timeScope = Instant.now(Clock.system(ZONE_ID)).minus(1, ChronoUnit.MINUTES);
     List<PersistentEvent> candidates = repository.findUnproducedByTimeScope(timeScope);
     if (candidates.isEmpty()) {
       return;

@@ -3,6 +3,8 @@
  */
 package com.vroong.msabootcamp.stream;
 
+import static com.vroong.msabootcamp.config.Constants.PROJECT_NAME;
+
 import com.vroong.msabootcamp.config.Constants.MessageKey;
 import com.vroong.msabootcamp.config.Constants.MessagePolicy;
 import com.vroong.msabootcamp.domain.PersistentEvent;
@@ -12,8 +14,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
-
-import static com.vroong.msabootcamp.config.Constants.PROJECT_NAME;
 
 @Component
 @RequiredArgsConstructor
@@ -34,6 +34,7 @@ public class MessageProducer {
         .setHeader(MessageKey.PARTITION_KEY, persistentEvent.getPartitionKey())
         .build();
 
+    log.debug("Event publish: {}", message);
     return messageChannel.send(message, MessagePolicy.DEFAULT_TIMEOUT);
   }
 }

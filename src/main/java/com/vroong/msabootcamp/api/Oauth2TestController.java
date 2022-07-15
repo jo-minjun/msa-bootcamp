@@ -76,6 +76,7 @@ public class Oauth2TestController {
    */
   @GetMapping("/user")
   public Authentication user() {
-    return SecurityContextHolder.getContext().getAuthentication();
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    return authentication;
   }
 }

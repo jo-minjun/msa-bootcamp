@@ -1,5 +1,6 @@
 package com.vroong.msabootcamp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vroong.msabootcamp.api.model.CreateSongRequestDto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,6 +41,7 @@ public class Song extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "album_id", foreignKey = @ForeignKey(name = "FK_SONG_TO_ALBUM"))
+  @JsonIgnore
   private Album album;
 
   @Builder
@@ -61,13 +63,13 @@ public class Song extends BaseEntity {
   }
 
   public void update(CreateSongRequestDto dto, Album album) {
-    this.title = dto.getTitle();
+    this.title = dto.getTitle() == null ? this.title : dto.getTitle() ;
     this.playTime = dto.getPlayTime();
     registerAlbum(album);
   }
 
   public void registerAlbum(Album album) {
     this.album = album;
-    album.getSongs().add(this);
+    album.getSongs().add(this); // 멱등 확인
   }
 }

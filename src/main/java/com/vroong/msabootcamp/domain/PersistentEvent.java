@@ -4,6 +4,9 @@
  */
 package com.vroong.msabootcamp.domain;
 
+import static com.vroong.msabootcamp.config.Constants.ZONE_ID;
+
+import java.time.Clock;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -40,7 +43,7 @@ public class PersistentEvent implements Serializable {
   @Lob
   private String body;
 
-  private Instant createdAt = Instant.now();
+  private Instant createdAt = Instant.now(Clock.system(ZONE_ID));
 
   private Instant producedAt;
 

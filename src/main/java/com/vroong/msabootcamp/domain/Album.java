@@ -29,7 +29,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@ToString(of = {"id", "publishedAt", "songs"})
+@ToString(of = {"id", "title", "publishedAt", "songs",})
 @EqualsAndHashCode(of = {"id"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Album extends BaseEntity {
