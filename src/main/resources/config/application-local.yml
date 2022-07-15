@@ -9,7 +9,7 @@ spring:
     properties.hibernate.format_sql: true
 
   liquibase:
-    enabled: true
+    enabled: false
     contexts: local
     change-log: classpath:/db/changelog-master.xml
 
